@@ -58,6 +58,10 @@ public class SectionService {
         Sections sections = new Sections(sectionDao.findByLineId(lineId));
         sections.checkCanDelete();
 
+        deleteAndInsert(lineId, stationId, sections);
+    }
+
+    private void deleteAndInsert(Long lineId, Long stationId, Sections sections) {
         int sectionDeletedNum = sectionDao.deleteByLineIdAndStationId(lineId, stationId);
 
         if (sectionDeletedNum == DELETE_TWO_LINE) {
