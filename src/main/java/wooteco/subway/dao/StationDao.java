@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.sql.DataSource;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -44,7 +44,7 @@ public class StationDao {
         final String sql = "SELECT * FROM STATION WHERE id = ?";
         try{
             return Optional.ofNullable(jdbcTemplate.queryForObject(sql, stationRowMapper, id));
-        } catch(IncorrectResultSizeDataAccessException e) {
+        } catch(EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
